@@ -53,3 +53,8 @@ body {
 #lista {
   color: black;
 }
+
+#limpar {
+  background-color: red;
+  color: white;
+}

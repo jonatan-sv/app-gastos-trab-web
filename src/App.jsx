@@ -3,10 +3,10 @@ import { TextField, Button, Box, Typography, List, ListItem, ListItemText, ListI
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 import './App.css';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const FormExample = () => {
   const dataKey = "gastos";
@@ -67,6 +67,11 @@ const FormExample = () => {
     setGastos(savedGastos);
   }, []);
 
+  const limparLista = () => {
+    localStorage.removeItem(dataKey);
+    setGastos([]);
+  }
+
   return (
     <Box sx={{ width: '100%', maxWidth: 500, margin: 'auto', padding: 2 }}>
       <Typography variant="h6" id="titulo" gutterBottom>
@@ -89,7 +94,7 @@ const FormExample = () => {
           name="valor"
           type="number"
           placeholder="Digite o quanto você gastou"
-          InputProps={{ startAdornment: 'R$ㅤ' }}
+          InputProps={{ startAdornment: 'R$ㅤ' }} // FIXME: Ver se tem como usar isso sem ser decrépito
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -112,6 +117,16 @@ const FormExample = () => {
           sx={{ mt: 2 }}
         >
           Registrar
+        </Button>
+
+        <Button
+          variant="contained"
+          id="limpar"
+          onClick={() => limparLista()}
+          fullWidth
+          sx={{ mt: 2 }}
+        >
+          Limpar
         </Button>
       </form>
 
