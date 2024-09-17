@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import dayjs from "dayjs";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import theme from "./styles/Theme";
+import "./styles/Style.css";
 import ExpensesForm from "./components/ExpensesForm";
 import ExpensesList from "./components/ExpensesList";
-import "./App.css";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   const dataKey = "gastos";
@@ -67,23 +70,39 @@ export default function App() {
     setGastos([]);
   };
 
+  const removerItem = (index) => {
+    const gastosAtualizados = gastos.filter((_, i) => i !== index);
+    setGastos(gastosAtualizados);
+    localStorage.setItem(dataKey, JSON.stringify(gastosAtualizados));
+  };
+
   return (
-    <Box id="app_box">
-      <Typography variant="h6" id="titulo" gutterBottom>
-        <AttachMoneyIcon />
-        Cadastro de Gastos
-        <AttachMoneyIcon />
-      </Typography>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar></Navbar>
+        <div id="main_div">
+          <Box id="app_box">
+            <Typography variant="h3" id="titulo" gutterBottom>
+              Cadastro de Gastos
+            </Typography>
 
-      <ExpensesForm
-        formData={formData}
-        handleChange={handleChange}
-        handleDateChange={handleDateChange}
-        handleRegister={handleRegister}
-        limparLista={limparLista}
-      />
+            <ExpensesForm
+              formData={formData}
+              handleChange={handleChange}
+              handleDateChange={handleDateChange}
+              handleRegister={handleRegister}
+              limparLista={limparLista}
+            />
 
-      <ExpensesList gastos={gastos} calcularTotalGastos={calcularTotalGastos} />
-    </Box>
+            <ExpensesList
+              gastos={gastos}
+              calcularTotalGastos={calcularTotalGastos}
+              removeItem={removerItem}
+            />
+          </Box>
+        </div>
+      </ThemeProvider>
+    </>
   );
 }

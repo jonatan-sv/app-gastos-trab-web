@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+
+#main_div {
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+#app_box {
+  width: '100%';
+  max-width: 500px;
+  margin: 'auto';
+  padding: 2px
+}
+
+#titulo {
+  text-align: center;
+  font-weight: bold;
+}
+
+#limpar {
+  border-radius: 20px;
+  background-color: #EE6969;
+  font-weight: bold;
+}
+
+#register_btn {
+  border-radius: 20px;
+  background-color: #9CEE69;
+  font-weight: bold;
+}
+
+/* Desativar as setas do input numérico */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* Largura */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Fundo */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #151515;
+}
+
+/* Barra */
+::-webkit-scrollbar-thumb {
+  background: #4E4E4E;
+  border-radius: 5px;
+}
+
+/* Barra hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9CEE69;
+}

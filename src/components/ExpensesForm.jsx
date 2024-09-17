@@ -3,6 +3,7 @@ import { TextField, Button, InputAdornment } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/pt-br";
 
 export default function ExpensesForm({
   formData,
@@ -14,22 +15,30 @@ export default function ExpensesForm({
   return (
     <form onSubmit={handleRegister}>
       <TextField
+        required
         label="Gasto"
         name="gasto"
         placeholder="Digite no quê você gastou"
+        autoComplete="off"
         value={formData.gasto}
         onChange={handleChange}
         fullWidth
         margin="normal"
+        slotProps={{ inputLabel: { shrink: true } }}
       />
       <TextField
+        required
         label="Valor"
         name="valor"
         type="number"
         placeholder="Digite o quanto você gastou"
-        slotProps={{ input: { startAdornment: 
-            <InputAdornment position="start">R$</InputAdornment>,
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">R$</InputAdornment>
+            ),
           },
+          htmlInput: { min: "0.01", step: "0.01" },
         }}
         value={formData.valor}
         onChange={handleChange}
@@ -48,8 +57,8 @@ export default function ExpensesForm({
       </LocalizationProvider>
 
       <Button
+        id="register_btn"
         variant="contained"
-        color="primary"
         type="submit"
         fullWidth
         sx={{ mt: 2 }}
