@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.0.2",
     "@mui/material": "^6.0.2",
     "@mui/x-date-pickers": "^7.16.0",
+    "app-gastos-trab-web": "file:",
     "dayjs": "^1.11.13",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

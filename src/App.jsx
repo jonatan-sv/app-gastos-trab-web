@@ -10,16 +10,16 @@ import ExpensesList from "./components/ExpensesList";
 import Navbar from "./components/Navbar";
 
 export default function App() {
-  const dataKey = "gastos";
+  const dataKey = "expenses";
 
   const initialFormData = {
-    gasto: "",
-    valor: "",
-    data: dayjs(),
+    expense: "",
+    amount: "",
+    date: dayjs(),
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [gastos, setGastos] = useState([]);
+  const [expenses, setExpenses] = useState([]);
 
   const handleChange = (e) => {
     setFormData({
@@ -31,49 +31,49 @@ export default function App() {
   const handleDateChange = (newValue) => {
     setFormData({
       ...formData,
-      data: newValue,
+      date: newValue,
     });
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    const novoGasto = {
+    const newExpense = {
       ...formData,
-      valor: parseFloat(formData.valor) || 0,
-      data: {
-        dia: formData.data.date(),
-        mes: formData.data.month() + 1,
-        ano: formData.data.year(),
+      amount: parseFloat(formData.amount) || 0,
+      date: {
+        day: formData.date.date(),
+        month: formData.date.month() + 1,
+        year: formData.date.year(),
       },
     };
-    const gastosAtualizados = [...gastos, novoGasto];
-    setGastos(gastosAtualizados);
-    localStorage.setItem(dataKey, JSON.stringify(gastosAtualizados));
+    const updatedExpenses = [...expenses, newExpense];
+    setExpenses(updatedExpenses);
+    localStorage.setItem(dataKey, JSON.stringify(updatedExpenses));
     setFormData(initialFormData);
   };
 
-  const calcularTotalGastos = () => {
-    const total = gastos.reduce(
-      (acc, gasto) => acc + (parseFloat(gasto.valor) || 0),
+  const calculateTotalExpenses = () => {
+    const total = expenses.reduce(
+      (acc, expense) => acc + (parseFloat(expense.amount) || 0),
       0
     );
     return total.toFixed(2);
   };
 
   useEffect(() => {
-    const savedGastos = JSON.parse(localStorage.getItem(dataKey)) || [];
-    setGastos(savedGastos);
+    const savedExpenses = JSON.parse(localStorage.getItem(dataKey)) || [];
+    setExpenses(savedExpenses);
   }, []);
 
-  const limparLista = () => {
+  const clearList = () => {
     localStorage.removeItem(dataKey);
-    setGastos([]);
+    setExpenses([]);
   };
 
-  const removerItem = (index) => {
-    const gastosAtualizados = gastos.filter((_, i) => i !== index);
-    setGastos(gastosAtualizados);
-    localStorage.setItem(dataKey, JSON.stringify(gastosAtualizados));
+  const removeItem = (index) => {
+    const updatedExpenses = expenses.filter((_, i) => i !== index);
+    setExpenses(updatedExpenses);
+    localStorage.setItem(dataKey, JSON.stringify(updatedExpenses));
   };
 
   return (
@@ -84,7 +84,7 @@ export default function App() {
         <div id="main_div">
           <Box id="app_box">
             <Typography variant="h3" id="titulo" gutterBottom>
-              Cadastro de Gastos
+              Registro de Gastos
             </Typography>
 
             <ExpensesForm
@@ -92,13 +92,13 @@ export default function App() {
               handleChange={handleChange}
               handleDateChange={handleDateChange}
               handleRegister={handleRegister}
-              limparLista={limparLista}
+              clearList={clearList}
             />
 
             <ExpensesList
-              gastos={gastos}
-              calcularTotalGastos={calcularTotalGastos}
-              removeItem={removerItem}
+              expenses={expenses}
+              calculateTotalExpenses={calculateTotalExpenses}
+              removeItem={removeItem}
             />
           </Box>
         </div>

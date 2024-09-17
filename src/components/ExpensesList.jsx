@@ -13,26 +13,26 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ExpensesList({
-  gastos,
-  calcularTotalGastos,
+  expenses,
+  calculateTotalExpenses,
   removeItem,
 }) {
   return (
-    <Box sx={{ mt: 4 }} id="lista">
+    <Box sx={{ mt: 4 }} id="list">
       <Typography variant="h6" gutterBottom>
-        Lista de Gastos - Total: R$ {calcularTotalGastos()}
+        Lista de Gastos - Total: R$ {calculateTotalExpenses()}
       </Typography>
       <List sx={{ width: "100%", maxWidth: "100%" }}>
-        {gastos.map((gasto, index) => (
+        {expenses.map((expense, index) => (
           <ListItem key={index}>
             <ListItemIcon>
               <AttachMoneyIcon color="primary" />
             </ListItemIcon>
             <ListItemText
-              primary={`${gasto.gasto} - R$ ${gasto.valor}`}
-              secondary={`Data: ${gasto.data.dia}/${gasto.data.mes}/${gasto.data.ano}`}
+              primary={`${expense.expense} - R$ ${expense.amount}`}
+              secondary={`Data: ${expense.date.day}/${expense.date.month}/${expense.date.year}`}
             />
-            <Tooltip title="Remover">
+            <Tooltip title="Remove">
               <IconButton
                 aria-label="fingerprint"
                 color="secondary"
@@ -49,18 +49,18 @@ export default function ExpensesList({
 }
 
 ExpensesList.propTypes = {
-  gastos: PropTypes.arrayOf(
+  expenses: PropTypes.arrayOf(
     PropTypes.shape({
-      gasto: PropTypes.string.isRequired,
-      valor: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      expense: PropTypes.string.isRequired,
+      amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         .isRequired,
-      data: PropTypes.shape({
-        dia: PropTypes.number.isRequired,
-        mes: PropTypes.number.isRequired,
-        ano: PropTypes.number.isRequired,
+      date: PropTypes.shape({
+        day: PropTypes.number.isRequired,
+        month: PropTypes.number.isRequired,
+        year: PropTypes.number.isRequired,
       }).isRequired,
     })
   ).isRequired,
-  calcularTotalGastos: PropTypes.func.isRequired,
+  calculateTotalExpenses: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
 };

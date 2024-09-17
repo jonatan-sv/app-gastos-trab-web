@@ -10,17 +10,17 @@ export default function ExpensesForm({
   handleChange,
   handleDateChange,
   handleRegister,
-  limparLista,
+  clearList,
 }) {
   return (
     <form onSubmit={handleRegister}>
       <TextField
         required
-        label="Gasto"
-        name="gasto"
+        label="Expense"
+        name="expense"
         placeholder="Digite no quê você gastou"
         autoComplete="off"
-        value={formData.gasto}
+        value={formData.expense}
         onChange={handleChange}
         fullWidth
         margin="normal"
@@ -28,8 +28,8 @@ export default function ExpensesForm({
       />
       <TextField
         required
-        label="Valor"
-        name="valor"
+        label="Amount"
+        name="amount"
         type="number"
         placeholder="Digite o quanto você gastou"
         slotProps={{
@@ -40,7 +40,7 @@ export default function ExpensesForm({
           },
           htmlInput: { min: "0.01", step: "0.01" },
         }}
-        value={formData.valor}
+        value={formData.amount}
         onChange={handleChange}
         fullWidth
         margin="normal"
@@ -48,8 +48,8 @@ export default function ExpensesForm({
 
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
         <DatePicker
-          label="Data"
-          value={formData.data}
+          label="Date"
+          value={formData.date}
           onChange={handleDateChange}
           slotProps={{ textField: { fullWidth: true, margin: "normal" } }}
           margin="normal"
@@ -69,7 +69,7 @@ export default function ExpensesForm({
       <Button
         id="limpar"
         variant="contained"
-        onClick={limparLista}
+        onClick={clearList}
         fullWidth
         sx={{ mt: 2 }}
       >
@@ -81,12 +81,13 @@ export default function ExpensesForm({
 
 ExpensesForm.propTypes = {
   formData: PropTypes.shape({
-    gasto: PropTypes.string,
-    valor: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    data: PropTypes.object.isRequired,
+    expense: PropTypes.string.isRequired,
+    amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    date: PropTypes.object.isRequired,
   }).isRequired,
   handleChange: PropTypes.func.isRequired,
   handleDateChange: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
-  limparLista: PropTypes.func.isRequired,
+  clearList: PropTypes.func.isRequired,
 };
