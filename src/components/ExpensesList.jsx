@@ -32,9 +32,8 @@ export default function ExpensesList({
               primary={`${expense.expense} - R$ ${expense.amount}`}
               secondary={`Data: ${expense.date.day}/${expense.date.month}/${expense.date.year}`}
             />
-            <Tooltip title="Remove">
+            <Tooltip title="Remover">
               <IconButton
-                aria-label="fingerprint"
                 color="secondary"
                 onClick={() => removeItem(index)}
               >

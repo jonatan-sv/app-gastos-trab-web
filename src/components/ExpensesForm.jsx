@@ -16,7 +16,7 @@ export default function ExpensesForm({
     <form onSubmit={handleRegister}>
       <TextField
         required
-        label="Expense"
+        label="Gasto"
         name="expense"
         placeholder="Digite no quê você gastou"
         autoComplete="off"
@@ -28,7 +28,7 @@ export default function ExpensesForm({
       />
       <TextField
         required
-        label="Amount"
+        label="Valor"
         name="amount"
         type="number"
         placeholder="Digite o quanto você gastou"
@@ -48,7 +48,7 @@ export default function ExpensesForm({
 
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
         <DatePicker
-          label="Date"
+          label="Data"
           value={formData.date}
           onChange={handleDateChange}
           slotProps={{ textField: { fullWidth: true, margin: "normal" } }}
